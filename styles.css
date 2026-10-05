@@ -207,6 +207,11 @@ h2,
   margin: 28px 0;
   color: var(--accent);
   font-size: 20px;
+  text-align: center;
+}
+
+.flower-mark .ornament-mark {
+  margin-inline: auto;
 }
 
 .invitation-copy {
