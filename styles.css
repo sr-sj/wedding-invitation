@@ -165,6 +165,13 @@ h2,
   font-size: 11px;
 }
 
+.ornament-mark {
+  display: block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+}
+
 .hero-divider span {
   width: 34px;
   height: 1px;
