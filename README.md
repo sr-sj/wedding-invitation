@@ -10,6 +10,6 @@
 
 네이버 지도 웹페이지를 iframe으로 넣지 않고, 공식 Maps JavaScript API를 사용해 페이지 안에 지도를 표시합니다. 지도는 예식장 좌표를 사용하므로 별도 주소 검색(Geocoding) API 호출이 필요하지 않습니다. GitHub 저장소의 Actions secrets에 `NAVER_MAPS_CLIENT_ID`를 설정하면 Pages 배포 시 빌드 스크립트가 이를 배포 파일에 주입합니다. Client ID는 브라우저에서 사용되므로 방문자가 확인할 수 있습니다. 네이버 클라우드 콘솔에서 Dynamic Map을 활성화하고, 허용 도메인을 실제 GitHub Pages 도메인으로 제한하세요. Client Secret은 등록하지 마세요. 키가 없거나 지도 인증에 실패하면 네이버·카카오·Google 지도 링크를 이용할 수 있습니다.
 
-지도 바로가기에는 네이버 지도·카카오맵·Google Maps에서 제공하는 아이콘을 사용하며, 빌드 시 `assets/map-icons/`의 이미지 파일도 함께 배포합니다.
+지도 바로가기 아이콘은 네이버 지도, 카카오맵, Google Maps의 공개 favicon 이미지 URL을 직접 사용합니다. 아이콘 이미지는 각 서비스에서 방문자 브라우저로 불러옵니다.
 
 청첩장 탭 아이콘은 반지 이모지 favicon을 사용합니다.
