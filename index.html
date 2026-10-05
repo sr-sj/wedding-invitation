@@ -6,10 +6,12 @@
     <meta name="theme-color" content="#f7f4ee">
     <meta name="description" content="성렬과 소정의 결혼식에 초대합니다. 2027년 1월 9일 토요일 낮 12시, 양재 온누리교회 사랑홀">
     <title>성렬 &amp; 소정, 결혼합니다</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- NAVER_MAPS_CONFIG -->
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -73,15 +75,10 @@
         <p class="address">서울특별시 서초구 바우뫼로31길 70</p>
 
         <div class="map-frame">
-          <iframe
-            title="양재 온누리교회 네이버 지도"
-            src="https://map.naver.com/p/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen>
-          </iframe>
-          <a class="map-fallback" href="https://map.naver.com/p/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener noreferrer">네이버 지도에서 크게 보기 ↗</a>
+          <div id="naver-map" class="naver-map" data-address="서울특별시 서초구 바우뫼로31길 70" aria-label="양재 온누리교회 사랑홀 네이버 지도"></div>
+          <p id="map-status" class="map-status" role="status" aria-live="polite">네이버 지도를 불러오는 중입니다.</p>
         </div>
+        <p class="map-instruction">아래 지도 앱에서 장소를 확인하고 길을 찾아오세요.</p>
         <nav class="map-links" aria-label="지도 앱으로 길 찾기">
           <a href="https://map.naver.com/p/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener noreferrer">
             <span class="map-icon map-icon-naver" aria-hidden="true">N</span><span>네이버 지도</span>

@@ -452,26 +452,37 @@ h2,
   position: relative;
   width: min(100%, 700px);
   height: 290px;
-  margin: 0 auto;
+  margin: 22px auto 0;
   overflow: hidden;
   background: #e5e4dc;
 }
 
-.map-frame iframe {
+.naver-map {
   width: 100%;
   height: 100%;
-  border: 0;
 }
 
-.map-fallback {
+.map-status {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding: 9px 12px;
-  background: rgb(252 250 246 / 94%);
-  color: var(--ink);
-  font-size: 11px;
-  text-decoration: none;
+  inset: 0;
+  display: grid;
+  margin: 0;
+  padding: 20px;
+  place-items: center;
+  background: rgb(229 228 220 / 94%);
+  color: #656c61;
+  font-size: 12px;
+  text-align: center;
+}
+
+.map-status[hidden] {
+  display: none;
+}
+
+.map-instruction {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .map-links {
