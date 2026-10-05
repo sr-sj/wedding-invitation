@@ -57,39 +57,31 @@ function updateMapStatus(message) {
 }
 
 function initializeNaverMap() {
-  const service = window.naver?.maps?.Service;
-  if (!service) {
-    updateMapStatus("네이버 지도 검색 기능을 불러오지 못했습니다. 아래 지도 앱 링크를 이용해 주세요.");
+  const maps = window.naver?.maps;
+  const latitude = Number(naverMap.dataset.latitude);
+  const longitude = Number(naverMap.dataset.longitude);
+
+  if (!maps || !Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+    updateMapStatus("네이버 지도를 표시할 수 없습니다. 아래 지도 앱 링크를 이용해 주세요.");
     return;
   }
 
-  service.geocode({ query: naverMap.dataset.address }, (status, response) => {
-    const address = response?.v2?.addresses?.[0];
-    const latitude = Number(address?.y);
-    const longitude = Number(address?.x);
-
-    if (status !== service.Status.OK || !Number.isFinite(latitude) || !Number.isFinite(longitude)) {
-      updateMapStatus("장소를 찾지 못했습니다. 아래 지도 앱 링크를 이용해 주세요.");
-      return;
-    }
-
-    const position = new window.naver.maps.LatLng(latitude, longitude);
-    const map = new window.naver.maps.Map(naverMap, {
-      center: position,
-      zoom: 16,
-      zoomControl: true,
-      zoomControlOptions: {
-        position: window.naver.maps.Position.TOP_RIGHT,
-      },
-    });
-
-    new window.naver.maps.Marker({
-      map,
-      position,
-      title: "양재 온누리교회 사랑홀",
-    });
-    updateMapStatus("");
+  const position = new maps.LatLng(latitude, longitude);
+  const map = new maps.Map(naverMap, {
+    center: position,
+    zoom: 16,
+    zoomControl: true,
+    zoomControlOptions: {
+      position: maps.Position.TOP_RIGHT,
+    },
   });
+
+  new maps.Marker({
+    map,
+    position,
+    title: "양재 온누리교회 사랑홀",
+  });
+  updateMapStatus("");
 }
 
 if (naverMap) {
@@ -104,7 +96,7 @@ if (naverMap) {
 
     window.initializeNaverWeddingMap = initializeNaverMap;
     const mapScript = document.createElement("script");
-    mapScript.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(clientId)}&submodules=geocoder&callback=initializeNaverWeddingMap`;
+    mapScript.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(clientId)}&callback=initializeNaverWeddingMap`;
     mapScript.async = true;
     mapScript.onerror = () => {
       updateMapStatus("네이버 지도를 불러오지 못했습니다. 아래 지도 앱 링크를 이용해 주세요.");
