@@ -247,10 +247,16 @@ h2,
   margin: 0;
 }
 
+.family-lines p > span:first-child {
+  color: #686d64;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .family-lines strong {
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
 }
 
