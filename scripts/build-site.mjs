@@ -12,6 +12,7 @@ await mkdir(outputDirectory, { recursive: true });
 for (const file of ["index.html", "styles.css", "script.js", "favicon.svg"]) {
   await cp(new URL(file, sourceDirectory), new URL(file, outputDirectory));
 }
+await cp(new URL("assets/", sourceDirectory), new URL("assets/", outputDirectory), { recursive: true });
 
 const pagePath = new URL("index.html", outputDirectory);
 const page = await readFile(pagePath, "utf8");

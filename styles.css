@@ -516,18 +516,11 @@ h2,
   font-weight: 700;
 }
 
-.map-icon-naver {
-  background: #03c75a;
-  color: white;
-}
-
-.map-icon-kakao {
-  background: #fee500;
-  color: #382c00;
-}
-
-.map-icon-google {
-  color: #4285f4;
+.map-brand-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .travel-notes {
@@ -561,10 +554,6 @@ h2,
   border-radius: 50%;
   color: var(--accent);
   font-size: 15px;
-}
-
-.meal-icon {
-  font-family: var(--serif);
 }
 
 .travel-note h4 {
