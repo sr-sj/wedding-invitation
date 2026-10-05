@@ -59,7 +59,7 @@ function updateMapStatus(message) {
 function initializeNaverMap() {
   const service = window.naver?.maps?.Service;
   if (!service) {
-    updateMapStatus("네이버 지도를 불러오지 못했습니다. 아래 지도 앱 링크를 이용해 주세요.");
+    updateMapStatus("네이버 지도 검색 기능을 불러오지 못했습니다. 아래 지도 앱 링크를 이용해 주세요.");
     return;
   }
 
@@ -102,10 +102,10 @@ if (naverMap) {
       updateMapStatus("네이버 지도 인증에 실패했습니다. 아래 지도 앱 링크를 이용해 주세요.");
     };
 
+    window.initializeNaverWeddingMap = initializeNaverMap;
     const mapScript = document.createElement("script");
-    mapScript.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(clientId)}&submodules=geocoder`;
+    mapScript.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(clientId)}&submodules=geocoder&callback=initializeNaverWeddingMap`;
     mapScript.async = true;
-    mapScript.onload = initializeNaverMap;
     mapScript.onerror = () => {
       updateMapStatus("네이버 지도를 불러오지 못했습니다. 아래 지도 앱 링크를 이용해 주세요.");
     };
