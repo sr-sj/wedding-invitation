@@ -52,7 +52,8 @@ a {
     radial-gradient(ellipse at 48% 76%, rgb(248 244 235 / 0%) 4%, rgb(248 244 235 / 5%) 36%, rgb(248 244 235 / 42%) 100%),
     radial-gradient(ellipse at 23% 30%, rgb(236 220 199 / 76%) 0, transparent 38%),
     radial-gradient(ellipse at 79% 39%, rgb(191 198 178 / 56%) 0, transparent 38%),
-    linear-gradient(150deg, #e6dfd0 0%, #d9d8cb 45%, #b9c0b0 100%);
+    linear-gradient(150deg, #e6dfd0 0%, #d9d8cb 45%, #b9c0b0 100%),
+    url("resources/main/main.jpg") center / cover no-repeat;
 }
 
 .hero-photo::before,
