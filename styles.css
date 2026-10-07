@@ -1321,3 +1321,15 @@ h2,
 .map-frame [class*="zoom_control"] {
   transform: translateY(-4.5rem) !important;
 }
+
+/* 지도 내부의 inline z-index가 상단 고정 네비게이션을 덮지 않도록 레이어를 분리 */
+.top-nav {
+  position: fixed;
+  z-index: 1000;
+}
+
+.map-frame {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
