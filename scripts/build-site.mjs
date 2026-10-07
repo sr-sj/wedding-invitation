@@ -15,12 +15,30 @@ for (const file of ["index.html", "styles.css", "script.js", "favicon.svg"]) {
 await cp(new URL("images/", sourceDirectory), new URL("images/", outputDirectory), { recursive: true });
 
 const pagePath = new URL("index.html", outputDirectory);
-const page = await readFile(pagePath, "utf8");
+let page = await readFile(pagePath, "utf8");
 const configTag = '<script src="naver-maps-config.js" defer></script>';
 if (!page.includes("<!-- NAVER_MAPS_CONFIG -->")) {
   throw new Error("NAVER Maps configuration placeholder is missing from index.html.");
 }
-await writeFile(pagePath, page.replace("<!-- NAVER_MAPS_CONFIG -->", configTag));
+page = page.replace("<!-- NAVER_MAPS_CONFIG -->", configTag);
+
+// GitHub Actions Secrets로부터 계좌 정보 읽어와 치환
+const accountReplacements = {
+  "{{BRIDE_ACCOUNT_BANK}}": process.env.BRIDE_ACCOUNT_BANK?.trim() || "국민은행",
+  "{{BRIDE_ACCOUNT_NUMBER}}": process.env.BRIDE_ACCOUNT_NUMBER?.trim() || "604802-04-0030000",
+  "{{BRIDE_FATHER_ACCOUNT_BANK}}": process.env.BRIDE_FATHER_ACCOUNT_BANK?.trim() || "국민은행",
+  "{{BRIDE_FATHER_ACCOUNT_NUMBER}}": process.env.BRIDE_FATHER_ACCOUNT_NUMBER?.trim() || "604802-01-00030300",
+  "{{GROOM_ACCOUNT_BANK}}": process.env.GROOM_ACCOUNT_BANK?.trim() || "토스뱅크",
+  "{{GROOM_ACCOUNT_NUMBER}}": process.env.GROOM_ACCOUNT_NUMBER?.trim() || "1000-0107-8612",
+  "{{GROOM_FATHER_ACCOUNT_BANK}}": process.env.GROOM_FATHER_ACCOUNT_BANK?.trim() || "농협",
+  "{{GROOM_FATHER_ACCOUNT_NUMBER}}": process.env.GROOM_FATHER_ACCOUNT_NUMBER?.trim() || "333-333-333-3333",
+};
+
+for (const [placeholder, value] of Object.entries(accountReplacements)) {
+  page = page.replaceAll(placeholder, value);
+}
+
+await writeFile(pagePath, page);
 await writeFile(
   new URL("naver-maps-config.js", outputDirectory),
   `window.NAVER_MAPS_CLIENT_ID = ${JSON.stringify(clientId)};\n`,

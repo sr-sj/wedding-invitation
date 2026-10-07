@@ -9,7 +9,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sr-sj.github.io/wedding-invitation/">
     <meta property="og:title" content="성렬 &amp; 소정, 결혼합니다">
-    <meta property="og:description" content="2027년 1월 9일 토요일 낮 12시, 양재 온누리교회 사랑홀">
+    <meta property="og:description" content="2027년 1월 9일 토요일 낮 12시\n양재 온누리교회 사랑홀">
     <meta property="og:image" content="https://sr-sj.github.io/wedding-invitation/images/main.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -21,16 +21,27 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <!-- 상단 바로가기 메뉴 (스크롤 시 부드럽게 등장하는 스마트 플로팅 바) -->
+    <nav class="top-nav" id="top-nav" aria-label="빠른 바로가기 메뉴">
+      <div class="top-nav-inner">
+        <a href="#invitation" class="nav-item">초대글</a>
+        <a href="#date" class="nav-item">예식일시</a>
+        <a href="#gallery" class="nav-item">갤러리</a>
+        <a href="#location" class="nav-item">오시는 길</a>
+        <a href="#account" class="nav-item">마음 전하기</a>
+      </div>
+    </nav>
+
     <header class="hero" id="top">
       <div class="hero-photo" role="img" aria-label="두 사람의 메인 사진 자리">
         <div class="hero-photo-note"><span>OUR DAY</span></div>
       </div>
       <div class="hero-copy">
         <p class="eyebrow">A NEW CHAPTER BEGINS</p>
-        <h1>우리, 결혼합니다<span class="title-period">.</span></h1>
+        <h1>저희, 결혼합니다</h1>
         <p class="hero-names">성렬 <span>&amp;</span> 소정</p>
         <div class="hero-divider" aria-hidden="true"><span></span><svg class="ornament-mark" viewBox="0 0 24 24"><path d="M12 3.5v5.75m0 5.5v5.75M3.5 12h5.75m5.5 0h5.75M5.99 5.99l4.07 4.07m3.88 3.88 4.07 4.07m0-12.02-4.07 4.07m-3.88 3.88-4.07 4.07" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/></svg><span></span></div>
-        <p class="hero-date">2027.01.09 · 토요일 낮 12시</p>
+        <p class="hero-date">2027.01.09 토요일 낮 12시</p>
         <p class="hero-place">양재 온누리교회 사랑홀</p>
       </div>
       <a class="scroll-cue" href="#invitation" aria-label="초대글로 이동"><span></span></a>
@@ -55,12 +66,50 @@
         <p class="eyebrow">SAVE THE DATE</p>
         <h2>우리의 날</h2>
         <p class="date-summary"><span>2027.01.09</span><span>토요일 · 낮 12시</span></p>
-        <div class="calendar" aria-label="2027년 1월 달력">
-          <div class="calendar-heading"><span>JANUARY</span><span>2027</span></div>
+        <!-- 달력과 D-Day가 아름답게 결합된 일체형 웨딩 캘린더 카드 -->
+        <div class="wedding-calendar-card" aria-label="2027년 1월 결혼식 달력 및 실시간 카운트다운">
+          <!-- 캘린더 상단 헤더: 영문 월/연도 & D-Day 뱃지 -->
+          <div class="calendar-card-header">
+            <div class="calendar-month-info">
+              <span class="month-en">JANUARY</span>
+              <span class="year-en">2027</span>
+            </div>
+            <div class="calendar-dday-badge" id="dday-badge">D-DAY</div>
+          </div>
+
+          <!-- 요일 & 날짜 그리드 -->
           <div class="calendar-grid calendar-weekdays" aria-hidden="true">
             <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
           </div>
           <div class="calendar-grid calendar-days" id="calendar-days"></div>
+
+          <!-- 하단 일체형 D-Day 실시간 카운트다운 -->
+          <div class="calendar-countdown-wrap">
+            <div class="dday-timer" id="dday-timer" aria-label="결혼식까지 남은 시간">
+              <div class="timer-unit">
+                <span class="timer-num" id="dday-days">--</span>
+                <span class="timer-label">DAYS</span>
+              </div>
+              <span class="timer-sep">:</span>
+              <div class="timer-unit">
+                <span class="timer-num" id="dday-hours">--</span>
+                <span class="timer-label">HOURS</span>
+              </div>
+              <span class="timer-sep">:</span>
+              <div class="timer-unit">
+                <span class="timer-num" id="dday-mins">--</span>
+                <span class="timer-label">MINS</span>
+              </div>
+              <span class="timer-sep">:</span>
+              <div class="timer-unit">
+                <span class="timer-num" id="dday-secs">--</span>
+                <span class="timer-label">SECS</span>
+              </div>
+            </div>
+            <p class="dday-caption" id="dday-text">
+              성렬 <span class="dday-heart">♥</span> 소정의 결혼식이 <strong id="dday-days-left">--</strong>일 남았습니다
+            </p>
+          </div>
         </div>
       </section>
 
@@ -74,7 +123,6 @@
       <section class="section location-section" id="location">
         <p class="eyebrow">THE WEDDING</p>
         <h2>오시는 길</h2>
-        <p class="location-date">2027년 1월 9일 토요일 낮 12시</p>
         <h3>양재 온누리교회 사랑홀</h3>
         <p class="address">서울특별시 서초구 바우뫼로31길 70</p>
 
@@ -82,31 +130,198 @@
           <div id="naver-map" class="naver-map" data-latitude="37.4795076" data-longitude="127.0339254" aria-label="양재 온누리교회 사랑홀 네이버 지도"></div>
           <p id="map-status" class="map-status" role="status" aria-live="polite">네이버 지도를 불러오는 중입니다.</p>
         </div>
-        <p class="map-instruction">아래 지도 앱에서 장소를 확인해 주세요.</p>
-        <nav class="map-links" aria-label="지도 앱으로 길 찾기">
-          <a href="https://map.naver.com/p/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener noreferrer">
-            <span class="map-icon" aria-hidden="true"><img class="map-brand-icon" src="https://ssl.pstatic.net/static/maps/assets/icons/favicon-32x32.png" width="32" height="32" alt=""></span><span>네이버 지도</span>
+        
+        <!-- 세련된 3대 지도 앱 필(Pill) 버튼 -->
+        <nav class="map-app-nav" aria-label="지도 앱 길찾기">
+          <a href="https://map.naver.com/p/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener noreferrer" class="map-app-btn naver">
+            <span class="map-app-label">네이버지도</span>
+            <svg class="map-app-arrow" viewBox="0 0 16 16" fill="none"><path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="https://map.kakao.com/link/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener noreferrer">
-            <span class="map-icon" aria-hidden="true"><img class="map-brand-icon" src="https://map.kakao.com/favicon.ico" width="32" height="32" alt=""></span><span>카카오맵</span>
+          <a href="https://map.kakao.com/link/search/%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener noreferrer" class="map-app-btn kakao">
+            <span class="map-app-label">카카오맵</span>
+            <svg class="map-app-arrow" viewBox="0 0 16 16" fill="none"><path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C%20%EC%82%AC%EB%9E%91%ED%99%80" target="_blank" rel="noopener noreferrer">
-            <span class="map-icon" aria-hidden="true"><img class="map-brand-icon" src="https://www.google.com/s2/favicons?domain_url=https%3A%2F%2Fmaps.google.com&amp;sz=128" width="32" height="32" alt=""></span><span>Google Maps</span>
+          <a href="tmap://route?goalname=%EC%96%91%EC%9E%AC%20%EC%98%A8%EB%88%84%EB%A6%AC%EA%B5%90%ED%9A%8C&amp;goalx=127.0339254&amp;goaly=37.4795076" id="tmap-btn" class="map-app-btn tmap" data-fallback="https://tmap.life/">
+            <span class="map-app-label">TMAP</span>
+            <svg class="map-app-arrow" viewBox="0 0 16 16" fill="none"><path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </nav>
 
-        <div class="travel-notes">
-          <article class="travel-note">
-            <span class="note-icon" aria-hidden="true">🚌</span>
-            <div><h4>셔틀버스</h4><p>양재역 앞 10번 출구<br>10분 간격 운행</p></div>
-          </article>
-          <article class="travel-note">
-            <span class="note-icon" aria-hidden="true">🍽️</span>
-            <div><h4>피로연 이용 안내</h4><p>당일 오전 11시 부터 오후 1시 반까지</p></div>
-          </article>
+        <!-- 감성적인 셔틀버스 모빌리티 가이드 -->
+        <div class="shuttle-card" aria-label="셔틀버스 이용 안내">
+          <div class="shuttle-card-header">
+            <span class="shuttle-badge">SHUTTLE BUS</span>
+            <h4>셔틀버스 운행 안내</h4>
+          </div>
+          <div class="shuttle-timeline" aria-hidden="true">
+            <div class="timeline-station">
+              <span class="station-node start"></span>
+              <div class="station-meta">
+                <strong class="station-name">양재역 10번 출구 앞</strong>
+                <span class="station-sub">3호선 · 신분당선</span>
+              </div>
+            </div>
+            <div class="timeline-route">
+              <div class="timeline-track">
+                <span class="track-line"></span>
+                <span class="track-badge">
+                  <svg class="bus-vector" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="15" rx="3"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M6 4v-1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+                  <span>10분 간격 운행</span>
+                </span>
+              </div>
+            </div>
+            <div class="timeline-station">
+              <span class="station-node end"></span>
+              <div class="station-meta">
+                <strong class="station-name">양재 온누리교회</strong>
+                <span class="station-sub">사랑홀 로비 도착</span>
+              </div>
+            </div>
+          </div>
+          <div class="shuttle-card-footer">
+            <p>
+              예식 당일 주차 공간이 협소할 수 있으니,<br>
+              <strong>양재역 10번 출구</strong>에서 출발하는 전용 셔틀버스를 이용해 주시기 바랍니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 정갈한 마음 전하실 곳 (Foldable Envelope UI) -->
+      <section class="section account-section" id="account">
+        <p class="eyebrow">FOR CELEBRATION</p>
+        <h2>마음 전하실 곳</h2>
+        <div class="flower-mark" aria-hidden="true"><svg class="ornament-mark" viewBox="0 0 24 24"><path d="M12 3.5v5.75m0 5.5v5.75M3.5 12h5.75m5.5 0h5.75M5.99 5.99l4.07 4.07m3.88 3.88 4.07 4.07m0-12.02-4.07 4.07m-3.88 3.88-4.07 4.07" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/></svg></div>
+        <p class="account-intro">
+          참석하지 못하시더라도 축복해 주시는<br>
+          소중한 마음 감사히 간직하겠습니다.
+        </p>
+
+        <div class="account-container">
+          <!-- 신랑 측 계좌 -->
+          <div class="account-foldable">
+            <button type="button" class="foldable-trigger" aria-expanded="false" aria-controls="groom-account-list">
+              <span class="trigger-label">
+                <span class="role-badge groom-badge">신랑측</span>
+                <span class="trigger-name">마음 전하는 곳</span>
+              </span>
+              <span class="trigger-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="foldable-content" id="groom-account-list" hidden>
+              <div class="account-item">
+                <div class="account-main">
+                  <div class="account-holder">
+                    <span class="relation">신랑</span>
+                    <strong class="name">마성렬</strong>
+                  </div>
+                  <div class="account-details">
+                    <span class="bank-tag">{{GROOM_ACCOUNT_BANK}}</span>
+                    <span class="acc-num">{{GROOM_ACCOUNT_NUMBER}}</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-copy" data-account="{{GROOM_ACCOUNT_NUMBER}}" aria-label="마성렬 계좌번호 복사">
+                  <span>복사</span>
+                </button>
+              </div>
+
+              <div class="account-item">
+                <div class="account-main">
+                  <div class="account-holder">
+                    <span class="relation">아버지</span>
+                    <strong class="name">마흥락</strong>
+                  </div>
+                  <div class="account-details">
+                    <span class="bank-tag">{{GROOM_FATHER_ACCOUNT_BANK}}</span>
+                    <span class="acc-num">{{GROOM_FATHER_ACCOUNT_NUMBER}}</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-copy" data-account="{{GROOM_FATHER_ACCOUNT_NUMBER}}" aria-label="마흥락 계좌번호 복사">
+                  <span>복사</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 신부 측 계좌 -->
+          <div class="account-foldable">
+            <button type="button" class="foldable-trigger" aria-expanded="false" aria-controls="bride-account-list">
+              <span class="trigger-label">
+                <span class="role-badge bride-badge">신부측</span>
+                <span class="trigger-name">마음 전하는 곳</span>
+              </span>
+              <span class="trigger-chevron" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="foldable-content" id="bride-account-list" hidden>
+              <div class="account-item">
+                <div class="account-main">
+                  <div class="account-holder">
+                    <span class="relation">신부</span>
+                    <strong class="name">이소정</strong>
+                  </div>
+                  <div class="account-details">
+                    <span class="bank-tag">{{BRIDE_ACCOUNT_BANK}}</span>
+                    <span class="acc-num">{{BRIDE_ACCOUNT_NUMBER}}</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-copy" data-account="{{BRIDE_ACCOUNT_NUMBER}}" aria-label="이소정 계좌번호 복사">
+                  <span>복사</span>
+                </button>
+              </div>
+
+              <div class="account-item">
+                <div class="account-main">
+                  <div class="account-holder">
+                    <span class="relation">아버지</span>
+                    <strong class="name">이현우</strong>
+                  </div>
+                  <div class="account-details">
+                    <span class="bank-tag">{{BRIDE_FATHER_ACCOUNT_BANK}}</span>
+                    <span class="acc-num">{{BRIDE_FATHER_ACCOUNT_NUMBER}}</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-copy" data-account="{{BRIDE_FATHER_ACCOUNT_NUMBER}}" aria-label="이현우 계좌번호 복사">
+                  <span>복사</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 호텔 웨딩 스타일 안내사항 섹션 -->
+      <section class="section info-section" id="info">
+        <p class="eyebrow">INFORMATION</p>
+        <h2>안내사항</h2>
+        <div class="flower-mark" aria-hidden="true"><svg class="ornament-mark" viewBox="0 0 24 24"><path d="M12 3.5v5.75m0 5.5v5.75M3.5 12h5.75m5.5 0h5.75M5.99 5.99l4.07 4.07m3.88 3.88 4.07 4.07m0-12.02-4.07 4.07m-3.88 3.88-4.07 4.07" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/></svg></div>
+
+        <div class="info-container">
+          <!-- 예식 안내 -->
+          <div class="info-block">
+            <span class="info-category">NOTICE</span>
+            <h3>예식 안내</h3>
+            <div class="info-desc">
+              <p>교회 내 음주, 흡연 및 화환 반입이 어려우니 양해 부탁드립니다.</p>
+              <p class="info-sub">주차 공간이 협소하오니 대중교통 이용을 부탁드립니다.</p>
+            </div>
+          </div>
+
+          <div class="info-sep" aria-hidden="true"><span></span></div>
+
+          <!-- 피로연 안내 -->
+          <div class="info-block">
+            <span class="info-category">RECEPTION</span>
+            <h3>피로연 안내</h3>
+            <div class="info-desc">
+              <p>오전 11시 부터 오후 1시 반까지 식사 가능합니다.</p>
+              <p class="info-sub">소중한 걸음 감사드리며, 정성껏 준비한 식사를 편안히 즐겨주세요.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- 프리미엄 플로팅 토스트 -->
+    <div id="copy-toast" class="toast" role="status" aria-live="polite">계좌번호가 복사되었습니다.</div>
 
     <footer class="footer">
       <p>성렬 <span>&amp;</span> 소정</p>

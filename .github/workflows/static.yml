@@ -36,6 +36,14 @@ jobs:
       - name: Build static site
         env:
           NAVER_MAPS_CLIENT_ID: ${{ secrets.NAVER_MAPS_CLIENT_ID }}
+          BRIDE_ACCOUNT_BANK: ${{ secrets.BRIDE_ACCOUNT_BANK }}
+          BRIDE_ACCOUNT_NUMBER: ${{ secrets.BRIDE_ACCOUNT_NUMBER }}
+          BRIDE_FATHER_ACCOUNT_BANK: ${{ secrets.BRIDE_FATHER_ACCOUNT_BANK }}
+          BRIDE_FATHER_ACCOUNT_NUMBER: ${{ secrets.BRIDE_FATHER_ACCOUNT_NUMBER }}
+          GROOM_ACCOUNT_BANK: ${{ secrets.GROOM_ACCOUNT_BANK }}
+          GROOM_ACCOUNT_NUMBER: ${{ secrets.GROOM_ACCOUNT_NUMBER }}
+          GROOM_FATHER_ACCOUNT_BANK: ${{ secrets.GROOM_FATHER_ACCOUNT_BANK }}
+          GROOM_FATHER_ACCOUNT_NUMBER: ${{ secrets.GROOM_FATHER_ACCOUNT_NUMBER }}
         run: node scripts/build-site.mjs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

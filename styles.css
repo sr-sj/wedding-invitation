@@ -31,6 +31,74 @@ a {
   color: inherit;
 }
 
+/* 스마트 플로팅 바로가기 네비게이션 */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(247, 244, 238, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(222, 217, 206, 0.65);
+  box-shadow: 0 4px 20px rgba(53, 67, 59, 0.04);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.top-nav.top-nav--visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.top-nav-inner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 6px;
+  height: 46px;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 4px;
+  color: #797c73;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 22%;
+  right: 22%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -190,6 +258,7 @@ h2,
 .section {
   padding: 92px 24px;
   text-align: center;
+  scroll-margin-top: 52px;
 }
 
 .section h2 {
@@ -286,23 +355,59 @@ h2,
   font-size: 13px;
 }
 
-.calendar {
-  width: min(100%, 340px);
+/* 일체형 프리미엄 웨딩 캘린더 카드 */
+.wedding-calendar-card {
+  width: min(100%, 350px);
   margin: 0 auto;
-  padding: 21px 19px 19px;
-  background: #fcfaf6;
+  padding: 24px 20px 22px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(222, 217, 206, 0.75);
+  box-shadow: 0 4px 24px rgba(53, 67, 59, 0.04);
 }
 
-.calendar-heading {
+.calendar-card-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 17px;
-  color: #656c61;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  align-items: center;
+  padding-bottom: 15px;
 }
 
+.calendar-month-info {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.month-en {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+
+.year-en {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.calendar-dday-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--ink);
+  color: #f7f4ee;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* 요일 및 날짜 그리드 */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -310,48 +415,113 @@ h2,
 }
 
 .calendar-weekdays {
-  padding: 11px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  color: #929187;
-  font-size: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(222, 217, 206, 0.7);
+  border-bottom: 1px solid rgba(222, 217, 206, 0.7);
+  color: #8c8d83;
+  font-size: 10.5px;
+  font-weight: 500;
 }
 
 .calendar-weekdays span:first-child,
 .calendar-days span:nth-child(7n + 1) {
-  color: #b6796b;
+  color: #b86e60;
 }
 
 .calendar-weekdays span:last-child,
 .calendar-days span:nth-child(7n) {
-  color: #728697;
+  color: #6a8294;
 }
 
 .calendar-days {
   row-gap: 3px;
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 .calendar-day {
   display: grid;
-  width: 31px;
-  height: 31px;
+  width: 32px;
+  height: 32px;
   place-items: center;
-  color: #555d54;
-  font-size: 11px;
+  color: #4f564e;
+  font-size: 11.5px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
 .calendar-day.wedding-day {
-  border-radius: 50%;
   background: var(--ink);
-  color: #fff !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(53, 67, 59, 0.2);
 }
 
-.calendar-note {
-  margin: 19px 0 0;
-  color: #6d7168;
+/* 하단 일체형 D-Day 카운트다운 영역 */
+.calendar-countdown-wrap {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(222, 217, 206, 0.85);
+  text-align: center;
+}
+
+.dday-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timer-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 44px;
+}
+
+.timer-num {
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.timer-label {
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.timer-sep {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: #cfcac0;
+  line-height: 1;
+  padding-bottom: 12px;
+}
+
+.dday-caption {
+  margin: 14px 0 0;
+  color: #5d635a;
+  font-family: var(--serif);
+  font-size: 13.5px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.dday-heart {
+  color: #cf796f;
+  display: inline-block;
+  margin: 0 2px;
+  font-size: 11px;
+}
+
+.dday-caption strong {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .gallery-section {
@@ -466,95 +636,520 @@ h2,
   display: none;
 }
 
-.map-instruction {
-  margin: 22px 0 0;
+.map-guide-hint {
+  margin: 20px 0 0;
+  color: #8c8e84;
+  font-size: 11.5px;
+  letter-spacing: -0.01em;
+}
+
+/* 세련된 3대 지도 앱 필(Pill) 버튼 */
+.map-app-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: min(100%, 390px);
+  gap: 8px;
+  margin: 18px auto 0;
+}
+
+.map-app-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 11px 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(222, 217, 206, 0.85);
+  box-shadow: 0 2px 8px rgba(53, 67, 59, 0.04);
+  color: #3b423c;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: all 0.22s ease;
+  cursor: pointer;
+}
+
+.map-app-arrow {
+  width: 12px;
+  height: 12px;
+  color: #a4a198;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.map-app-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--ink);
+  box-shadow: 0 4px 14px rgba(53, 67, 59, 0.09);
+}
+
+.map-app-btn:hover .map-app-arrow {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.map-app-btn:active {
+  transform: translateY(0);
+}
+
+/* 프리미엄 셔틀버스 모빌리티 가이드 */
+.shuttle-card {
+  width: min(100%, 480px);
+  margin: 36px auto 0;
+  padding: 26px 20px 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(222, 217, 206, 0.75);
+  box-shadow: 0 4px 20px rgba(53, 67, 59, 0.04);
+  text-align: center;
+}
+
+.shuttle-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+
+.shuttle-badge {
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(174, 136, 98, 0.12);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.shuttle-card-header h4 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.shuttle-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 12px;
+  background: #fbf9f5;
+  border-radius: 12px;
+  border: 1px solid rgba(222, 217, 206, 0.6);
+  margin-bottom: 16px;
+}
+
+.timeline-station {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 90px;
+}
+
+.station-node {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px #b6b8ae;
+}
+
+.station-node.start {
+  background: #8e9085;
+}
+
+.station-node.end {
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.station-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.station-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.station-sub {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.timeline-route {
+  flex: 1;
+  padding: 0 6px;
+}
+
+.timeline-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.track-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, #c9c4b7, #c9c4b7 4px, transparent 4px, transparent 8px);
+  transform: translateY(-50%);
+}
+
+.track-badge {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(222, 217, 206, 0.85);
+  color: var(--accent);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 6px rgba(53, 67, 59, 0.05);
+}
+
+.bus-vector {
+  width: 13px;
+  height: 13px;
+  stroke: var(--accent);
+}
+
+.shuttle-card-footer p {
+  margin: 0;
+  color: #656960;
+  font-size: 12px;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.shuttle-card-footer strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* 정갈한 마음 전하실 곳 (Foldable Envelope UI) */
+.account-section {
+  background: #fbf9f5;
+}
+
+.account-intro {
+  margin: 18px 0 28px;
+  color: #6d7168;
+  font-family: var(--serif);
+  font-size: 13.5px;
+  line-height: 1.85;
+  word-break: keep-all;
+}
+
+.account-container {
+  width: min(100%, 440px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.account-foldable {
+  border: 1px solid rgba(222, 217, 206, 0.85);
+  border-radius: 14px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(53, 67, 59, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.account-foldable:hover {
+  border-color: #cdbeaa;
+  box-shadow: 0 4px 16px rgba(53, 67, 59, 0.06);
+}
+
+.foldable-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 20px;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.foldable-trigger:hover {
+  background-color: #faf7f2;
+}
+
+.trigger-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.role-badge.groom-badge {
+  background: #eef3ee;
+  color: #3b5f49;
+}
+
+.role-badge.bride-badge {
+  background: #fbeeec;
+  color: #92534a;
+}
+
+.trigger-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.trigger-chevron {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  color: #8c8d83;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.trigger-chevron svg {
+  width: 15px;
+  height: 15px;
+}
+
+.foldable-trigger[aria-expanded="true"] .trigger-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.foldable-content {
+  padding: 6px 16px 16px;
+  border-top: 1px solid #f2ece2;
+  background: #fdfbf7;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.foldable-content[hidden] {
+  display: none;
+}
+
+.account-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(222, 217, 206, 0.65);
+}
+
+.account-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.account-holder {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.account-holder .relation {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.account-holder .name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.account-details {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #646860;
+}
+
+.bank-tag {
+  color: #7d8076;
+  font-weight: 500;
+}
+
+.acc-num {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  color: #444741;
+}
+
+.btn-copy {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid #ded7cb;
+  background: #f9f7f2;
+  color: #555d54;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.btn-copy:hover {
+  border-color: var(--accent);
+  background: #ffffff;
+  color: var(--accent);
+}
+
+.btn-copy.copied {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+/* 호텔 웨딩 스타일 안내사항 섹션 */
+.info-section {
+  background: var(--paper);
+}
+
+.info-container {
+  width: min(100%, 460px);
+  margin: 28px auto 0;
+  padding: 30px 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(222, 217, 206, 0.75);
+  box-shadow: 0 4px 20px rgba(53, 67, 59, 0.03);
+  text-align: center;
+}
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.info-category {
+  display: inline-block;
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+.info-block h3 {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.info-desc p {
+  margin: 0;
+  color: #5d635a;
+  font-size: 13px;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.info-desc .info-sub {
+  margin-top: 5px;
   color: var(--muted);
   font-size: 12px;
 }
 
-.map-links {
+.info-sep {
   display: flex;
-  width: min(100%, 460px);
-  justify-content: space-around;
-  gap: 8px;
-  margin: 22px auto 0;
-}
-
-.map-links a {
-  display: flex;
-  min-width: 83px;
-  flex-direction: column;
   align-items: center;
-  gap: 7px;
-  color: #696e65;
-  font-size: 10px;
-  text-decoration: none;
+  justify-content: center;
+  margin: 24px 0;
 }
 
-.map-icon {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border-radius: 12px;
-  background: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 17px;
-  font-weight: 700;
+.info-sep span {
+  width: 48px;
+  height: 1px;
+  background: rgba(222, 217, 206, 0.85);
+  position: relative;
 }
 
-.map-brand-icon {
-  display: block;
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
-.travel-notes {
-  display: grid;
-  width: min(100%, 700px);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 38px auto 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.travel-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 21px 14px;
-  text-align: left;
-}
-
-.travel-note + .travel-note {
-  border-left: 1px solid var(--line);
-}
-
-.note-icon {
-  display: grid;
-  width: 27px;
-  height: 27px;
-  flex: 0 0 27px;
-  place-items: center;
-  border: 1px solid #c9c1b5;
-  border-radius: 50%;
+.info-sep span::after {
+  content: "♦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 0 6px;
+  font-size: 7px;
   color: var(--accent);
-  font-size: 15px;
 }
 
-.travel-note h4 {
-  margin: 2px 0 8px;
-  font-size: 11px;
-  font-weight: 500;
+/* 프리미엄 플로팅 토스트 */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px);
+  z-index: 1000;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: rgba(35, 43, 38, 0.94);
+  color: #f7f4ee;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-.travel-note p {
-  margin: 0;
-  color: #73766d;
-  font-size: 11px;
-  line-height: 1.8;
-  word-break: keep-all;
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .footer {
@@ -613,6 +1208,16 @@ h2,
 }
 
 @media (max-width: 390px) {
+  .top-nav-inner {
+    padding: 0 4px;
+    height: 44px;
+  }
+
+  .nav-item {
+    font-size: 11px;
+    padding: 0 2px;
+  }
+
   .section {
     padding-right: 18px;
     padding-left: 18px;
@@ -623,14 +1228,74 @@ h2,
     font-size: 11px;
   }
 
-  .travel-note {
-    gap: 8px;
-    padding-right: 8px;
-    padding-left: 8px;
+  .wedding-calendar-card {
+    padding: 20px 14px 18px;
   }
 
-  .travel-note p {
-    font-size: 10px;
+  .timer-unit {
+    min-width: 36px;
+  }
+
+  .timer-num {
+    font-size: 19px;
+  }
+
+  .map-app-nav {
+    gap: 6px;
+  }
+
+  .map-app-btn {
+    padding: 10px 4px;
+    font-size: 11.5px;
+  }
+
+  .shuttle-card {
+    padding: 22px 14px 18px;
+  }
+
+  .shuttle-timeline {
+    padding: 14px 8px;
+  }
+
+  .timeline-station {
+    min-width: 76px;
+  }
+
+  .station-name {
+    font-size: 11px;
+  }
+
+  .station-sub {
+    font-size: 9px;
+  }
+
+  .foldable-trigger {
+    padding: 15px 14px;
+  }
+
+  .trigger-name {
+    font-size: 12.5px;
+  }
+
+  .account-item {
+    padding: 11px 12px;
+  }
+
+  .account-details {
+    font-size: 11px;
+  }
+
+  .btn-copy {
+    padding: 4px 10px;
+    font-size: 10.5px;
+  }
+
+  .info-container {
+    padding: 24px 16px;
+  }
+
+  .info-desc p {
+    font-size: 12px;
   }
 }
 

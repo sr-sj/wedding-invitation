@@ -46,6 +46,201 @@ if (galleryGrid) {
   galleryGrid.append(slots);
 }
 
+/* ==========================================================================
+   1. 실시간 D-Day 카운트다운 타이머 (초 단위 라이브)
+   ========================================================================== */
+function setupLiveCountdown() {
+  const weddingTime = new Date(2027, 0, 9, 12, 0, 0).getTime(); // 2027년 1월 9일 낮 12시
+  const daysEl = document.querySelector("#dday-days");
+  const hoursEl = document.querySelector("#dday-hours");
+  const minsEl = document.querySelector("#dday-mins");
+  const secsEl = document.querySelector("#dday-secs");
+  const badgeEl = document.querySelector("#dday-badge");
+  const daysLeftEl = document.querySelector("#dday-days-left");
+  const textEl = document.querySelector("#dday-text");
+
+  function updateTimer() {
+    const now = new Date().getTime();
+    const distance = weddingTime - now;
+
+    if (distance > 0) {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (daysEl) daysEl.textContent = String(days);
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+      if (minsEl) minsEl.textContent = String(mins).padStart(2, "0");
+      if (secsEl) secsEl.textContent = String(secs).padStart(2, "0");
+
+      if (badgeEl) badgeEl.textContent = `D-${days}`;
+      if (daysLeftEl) daysLeftEl.textContent = String(days);
+    } else {
+      // 당일 또는 이후
+      const passedDays = Math.floor(Math.abs(distance) / (1000 * 60 * 60 * 24));
+      if (daysEl) daysEl.textContent = "0";
+      if (hoursEl) hoursEl.textContent = "00";
+      if (minsEl) minsEl.textContent = "00";
+      if (secsEl) secsEl.textContent = "00";
+
+      if (passedDays === 0) {
+        if (badgeEl) badgeEl.textContent = "D-DAY";
+        if (textEl) textEl.innerHTML = `오늘, 성렬 <span class="dday-heart">♥</span> 소정이 하나 되는 날입니다 🎉`;
+      } else {
+        if (badgeEl) badgeEl.textContent = `D+${passedDays}`;
+        if (textEl) textEl.innerHTML = `성렬 <span class="dday-heart">♥</span> 소정이 결혼한 지 <strong>${passedDays}일</strong> 되었습니다`;
+      }
+    }
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+setupLiveCountdown();
+
+/* ==========================================================================
+   2. 스마트 플로팅 네비게이션 (스크롤 감지 & 섹션 스파이)
+   ========================================================================== */
+const topNav = document.querySelector("#top-nav");
+const navItems = document.querySelectorAll(".top-nav .nav-item");
+const sections = document.querySelectorAll("main section[id]");
+
+function handleNavVisibility() {
+  if (!topNav) return;
+  // Hero 영역(약 260px)을 지날 때 부드럽게 등장
+  if (window.scrollY > 260) {
+    topNav.classList.add("top-nav--visible");
+  } else {
+    topNav.classList.remove("top-nav--visible");
+  }
+}
+
+window.addEventListener("scroll", handleNavVisibility, { passive: true });
+handleNavVisibility();
+
+if (navItems.length && sections.length && "IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navItems.forEach((item) => {
+            if (item.getAttribute("href") === `#${id}`) {
+              item.classList.add("active");
+            } else {
+              item.classList.remove("active");
+            }
+          });
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "-25% 0px -55% 0px",
+      threshold: 0,
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+/* ==========================================================================
+   3. 지도 앱 (TMAP 데스크톱/미설치 폴백 처리)
+   ========================================================================== */
+const tmapBtn = document.querySelector("#tmap-btn");
+if (tmapBtn) {
+  tmapBtn.addEventListener("click", (event) => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!isMobile) {
+      event.preventDefault();
+      const fallbackUrl = tmapBtn.dataset.fallback || "https://tmap.life/";
+      window.open(fallbackUrl, "_blank", "noopener,noreferrer");
+    }
+  });
+}
+
+/* ==========================================================================
+   4. 마음 전하는 곳 아코디언 (접기/펼치기)
+   ========================================================================== */
+const foldableTriggers = document.querySelectorAll(".foldable-trigger");
+foldableTriggers.forEach((button) => {
+  button.addEventListener("click", () => {
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
+    const contentId = button.getAttribute("aria-controls");
+    const content = document.getElementById(contentId);
+
+    button.setAttribute("aria-expanded", String(!isExpanded));
+    if (content) {
+      content.hidden = isExpanded;
+    }
+  });
+});
+
+/* ==========================================================================
+   5. 계좌번호 복사하기 & 토스트 알림
+   ========================================================================== */
+const copyToast = document.querySelector("#copy-toast");
+let toastTimer = null;
+
+function showToast(message) {
+  if (!copyToast) return;
+  copyToast.textContent = message;
+  copyToast.classList.add("show");
+  if (toastTimer) {
+    clearTimeout(toastTimer);
+  }
+  toastTimer = setTimeout(() => {
+    copyToast.classList.remove("show");
+  }, 2200);
+}
+
+const copyButtons = document.querySelectorAll(".btn-copy");
+copyButtons.forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const account = btn.dataset.account;
+    if (!account) return;
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(account);
+      } else {
+        const tempInput = document.createElement("input");
+        tempInput.value = account;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+
+      const originalSpan = btn.querySelector("span");
+      const originalText = originalSpan ? originalSpan.textContent : btn.textContent;
+
+      if (originalSpan) {
+        originalSpan.textContent = "복사완료";
+      } else {
+        btn.textContent = "복사완료";
+      }
+      btn.classList.add("copied");
+
+      showToast("계좌번호가 복사되었습니다.");
+
+      setTimeout(() => {
+        if (originalSpan) {
+          originalSpan.textContent = originalText;
+        } else {
+          btn.textContent = originalText;
+        }
+        btn.classList.remove("copied");
+      }, 1800);
+    } catch (err) {
+      console.error("복사 실패:", err);
+      showToast("복사에 실패했습니다. 번호를 직접 복사해 주세요.");
+    }
+  });
+});
+
 const naverMap = document.querySelector("#naver-map");
 const mapStatus = document.querySelector("#map-status");
 let naverMapInitialized = false;
