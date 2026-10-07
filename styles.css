@@ -1333,3 +1333,112 @@ h2,
   z-index: 0;
   isolation: isolate;
 }
+
+/* 가족관계 표기: 부모 이름, 배우자 이름, 관계, 자녀 이름을 같은 열에 정렬 */
+.family-lines p {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.5rem 2.5rem;
+  align-items: baseline;
+  column-gap: 0.35rem;
+}
+
+.family-lines .family-parents {
+  display: grid !important;
+  grid-template-columns: 3.2em 1em minmax(0, 1fr);
+  align-items: baseline;
+  min-width: 0;
+}
+
+.family-lines .family-father {
+  text-align: left;
+}
+
+.family-lines .family-dot {
+  text-align: center;
+}
+
+.family-lines .family-mother {
+  text-align: right;
+}
+
+.family-lines .relationship {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.15rem;
+  width: 3.5rem;
+  white-space: nowrap;
+}
+
+.family-lines strong {
+  text-align: right;
+}
+
+.family-lines .relationship-role {
+  text-align: right;
+}
+
+/* 테두리 없는 표로 가족관계의 각 기준선을 고정 */
+.family-lines {
+  width: auto;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: auto;
+  font: inherit;
+}
+
+.family-lines td {
+  padding: 0;
+  vertical-align: baseline;
+  white-space: nowrap;
+  font: inherit;
+}
+
+.family-lines tr + tr td {
+  padding-top: 10px;
+}
+
+.family-lines .family-father {
+  color: #686d64;
+  font-size: 16px;
+  font-weight: 700;
+  width: 3.2em;
+  text-align: left;
+}
+
+.family-lines .family-dot {
+  color: #686d64;
+  font-size: 16px;
+  font-weight: 700;
+  width: 1em;
+  text-align: center;
+}
+
+.family-lines .family-mother {
+  color: #686d64;
+  font-size: 16px;
+  font-weight: 700;
+  width: 4em;
+  text-align: center;
+}
+
+.family-lines .relationship-particle {
+  color: #99958b;
+  font-size: 10px;
+  width: 1.1em;
+  padding-left: 0.35rem;
+  text-align: left;
+}
+
+.family-lines .relationship-role {
+  color: #99958b;
+  font-size: 10px;
+  width: 2.5em;
+  text-align: right;
+}
+
+.family-lines .family-child {
+  width: 2.5em;
+  padding-left: 0.35rem;
+  text-align: right;
+}
