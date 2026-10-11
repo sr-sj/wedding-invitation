@@ -1,6 +1,10 @@
 const calendarDays = document.querySelector("#calendar-days");
 const galleryGrid = document.querySelector("#gallery-grid");
 
+if (window.Kakao && window.KAKAO_JS_KEY && !window.Kakao.isInitialized()) {
+  window.Kakao.init(window.KAKAO_JS_KEY);
+}
+
 if (calendarDays) {
   const blankDays = 5;
   const daysInJanuary = 31;
@@ -194,6 +198,54 @@ function showToast(message) {
   toastTimer = setTimeout(() => {
     copyToast.classList.remove("show");
   }, 2200);
+}
+
+const kakaoShareButton = document.querySelector("#kakao-share-btn");
+if (kakaoShareButton) {
+  kakaoShareButton.addEventListener("click", async () => {
+    const shareUrl = window.location.href;
+    const shareTitle = document.title;
+    const shareText = "성렬과 소정의 결혼식에 초대합니다.";
+
+    try {
+      if (window.Kakao && window.Kakao.Share && window.Kakao.isInitialized?.()) {
+        window.Kakao.Share.sendDefault({
+          objectType: "text",
+          text: `${shareText}\n${shareTitle}`,
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
+        });
+        return;
+      }
+
+      if (navigator.share) {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const tempInput = document.createElement("input");
+        tempInput.value = shareUrl;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+
+      showToast("초대 링크가 복사되었습니다.");
+    } catch (error) {
+      console.error("공유 실패:", error);
+      showToast("공유를 사용할 수 없어 링크를 복사해 주세요.");
+    }
+  });
 }
 
 const copyButtons = document.querySelectorAll(".btn-copy");

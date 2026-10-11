@@ -5,6 +5,11 @@ if (!clientId) {
   throw new Error("NAVER_MAPS_CLIENT_ID is required to build the GitHub Pages site.");
 }
 
+const kakaoJsKey = process.env.KAKAO_JS_KEY?.trim();
+if (!kakaoJsKey) {
+  throw new Error("KAKAO_JS_KEY is required to build the GitHub Pages site.");
+}
+
 const outputDirectory = new URL("../dist/", import.meta.url);
 const sourceDirectory = new URL("../", import.meta.url);
 await mkdir(outputDirectory, { recursive: true });
@@ -21,6 +26,14 @@ if (!page.includes("<!-- NAVER_MAPS_CONFIG -->")) {
   throw new Error("NAVER Maps configuration placeholder is missing from index.html.");
 }
 page = page.replace("<!-- NAVER_MAPS_CONFIG -->", configTag);
+const kakaoConfigTag = [
+  '<script src="kakao-config.js" defer></script>',
+  '<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous" defer></script>',
+].join("\n    ");
+if (!page.includes("<!-- KAKAO_SDK_CONFIG -->")) {
+  throw new Error("Kakao SDK configuration placeholder is missing from index.html.");
+}
+page = page.replace("<!-- KAKAO_SDK_CONFIG -->", kakaoConfigTag);
 
 // GitHub Actions Secrets로부터 계좌 정보 읽어와 치환
 const accountReplacements = {
@@ -42,4 +55,8 @@ await writeFile(pagePath, page);
 await writeFile(
   new URL("naver-maps-config.js", outputDirectory),
   `window.NAVER_MAPS_CLIENT_ID = ${JSON.stringify(clientId)};\n`,
+);
+await writeFile(
+  new URL("kakao-config.js", outputDirectory),
+  `window.KAKAO_JS_KEY = ${JSON.stringify(kakaoJsKey)};\n`,
 );

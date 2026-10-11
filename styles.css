@@ -1171,12 +1171,33 @@ h2,
   font-size: 11px;
 }
 
-.footer a {
-  display: inline-block;
+.footer .kakao-share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 23px;
-  color: #ded7cb;
-  font-size: 10px;
-  text-decoration: none;
+  min-width: 160px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #fee500;
+  color: #3b2c1e;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer .kakao-share-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
+}
+
+.footer .kakao-share-btn:active {
+  transform: translateY(0);
 }
 
 @media (min-width: 700px) {

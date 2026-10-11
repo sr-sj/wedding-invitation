@@ -36,6 +36,7 @@ jobs:
       - name: Build static site
         env:
           NAVER_MAPS_CLIENT_ID: ${{ secrets.NAVER_MAPS_CLIENT_ID }}
+          KAKAO_JS_KEY: ${{ secrets.KAKAO_JS_KEY }}
           BRIDE_ACCOUNT_BANK: ${{ secrets.BRIDE_ACCOUNT_BANK }}
           BRIDE_ACCOUNT_NUMBER: ${{ secrets.BRIDE_ACCOUNT_NUMBER }}
           BRIDE_FATHER_ACCOUNT_BANK: ${{ secrets.BRIDE_FATHER_ACCOUNT_BANK }}
