@@ -99,6 +99,68 @@ a {
   border-radius: 2px 2px 0 0;
 }
 
+.accessibility-controls {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.accessibility-controls--dismissed,
+.accessibility-controls--share-visible {
+  display: none;
+}
+
+.accessibility-toggle,
+.accessibility-dismiss {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgb(53 67 59 / 18%);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.accessibility-toggle {
+  gap: 7px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.accessibility-dismiss {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border-width: 1px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.accessibility-toggle span:first-child {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.accessibility-toggle:focus-visible,
+.accessibility-dismiss:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.accessibility-mode .accessibility-toggle {
+  background: var(--ink);
+  color: #ffffff;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -1596,4 +1658,169 @@ h2,
 
 .family-lines .family-child strong {
   color: #686d64;
+}
+
+body.accessibility-mode {
+  --paper: #fffefa;
+  --paper-deep: #eeeae1;
+  --ink: #1d2921;
+  --muted: #4d554e;
+  --accent: #76542e;
+  --line: #aaa394;
+  color: #202820;
+}
+
+.accessibility-mode .nav-item {
+  font-size: 14px;
+}
+
+.accessibility-mode .eyebrow {
+  font-size: 12px;
+}
+
+.accessibility-mode .hero h1 {
+  font-size: clamp(29px, 8.5vw, 58px);
+}
+
+.accessibility-mode .hero-names {
+  font-size: 23px;
+}
+
+.accessibility-mode .hero-date,
+.accessibility-mode .hero-place {
+  font-size: 16px;
+}
+
+.accessibility-mode .section h2 {
+  font-size: 34px;
+}
+
+.accessibility-mode .invitation-copy {
+  font-size: 18px;
+}
+
+.accessibility-mode .family-lines .family-father,
+.accessibility-mode .family-lines .family-dot,
+.accessibility-mode .family-lines .family-mother,
+.accessibility-mode .family-lines .family-child strong {
+  font-size: 18px;
+}
+
+.accessibility-mode .family-lines .relationship-particle,
+.accessibility-mode .family-lines .relationship-role {
+  color: #4d554e;
+  font-size: 12px;
+}
+
+.accessibility-mode .date-summary span:first-child {
+  font-size: 28px;
+}
+
+.accessibility-mode .date-summary span:nth-child(2),
+.accessibility-mode .month-en {
+  font-size: 18px;
+}
+
+.accessibility-mode .year-en,
+.accessibility-mode .calendar-dday-badge,
+.accessibility-mode .calendar-weekdays {
+  font-size: 13px;
+}
+
+.accessibility-mode .calendar-day {
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+}
+
+.accessibility-mode .timer-num {
+  font-size: 26px;
+}
+
+.accessibility-mode .timer-label {
+  font-size: 10px;
+}
+
+.accessibility-mode .dday-caption {
+  font-size: 16px;
+}
+
+.accessibility-mode .section-note,
+.accessibility-mode .location-date,
+.accessibility-mode .address,
+.accessibility-mode .station-sub {
+  font-size: 14px;
+}
+
+.accessibility-mode .location-section h3 {
+  font-size: 23px;
+}
+
+.accessibility-mode .map-app-btn,
+.accessibility-mode .transport-card-footer p,
+.accessibility-mode .transit-mode-content p,
+.accessibility-mode .subway-directions li {
+  font-size: 15px;
+}
+
+.accessibility-mode .transport-card-header h4 {
+  font-size: 20px;
+}
+
+.accessibility-mode .transit-mode-heading h5,
+.accessibility-mode .station-name,
+.accessibility-mode .account-intro,
+.accessibility-mode .info-desc p {
+  font-size: 17px;
+}
+
+.accessibility-mode .bus-routes span,
+.accessibility-mode .walk-distance,
+.accessibility-mode .transit-mode-icon,
+.accessibility-mode .info-desc .info-sub {
+  font-size: 13px;
+}
+
+.accessibility-mode .foldable-trigger,
+.accessibility-mode .trigger-name,
+.accessibility-mode .account-holder .name,
+.accessibility-mode .account-details,
+.accessibility-mode .btn-copy {
+  font-size: 15px;
+}
+
+.accessibility-mode .role-badge,
+.accessibility-mode .account-holder .relation,
+.accessibility-mode .info-category {
+  font-size: 12px;
+}
+
+.accessibility-mode .info-block h3 {
+  font-size: 20px;
+}
+
+.accessibility-mode .footer > p:first-child {
+  font-size: 20px;
+}
+
+.accessibility-mode .footer > p:nth-child(2),
+.accessibility-mode .footer .kakao-share-btn {
+  font-size: 14px;
+}
+
+.accessibility-mode .calendar-weekdays,
+.accessibility-mode .timer-label,
+.accessibility-mode .station-sub,
+.accessibility-mode .address,
+.accessibility-mode .location-date,
+.accessibility-mode .account-holder .relation,
+.accessibility-mode .account-details,
+.accessibility-mode .info-desc .info-sub {
+  color: #454e46;
+}
+
+@media (max-width: 390px) {
+  .accessibility-mode .nav-item {
+    font-size: 12px;
+  }
 }

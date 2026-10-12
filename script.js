@@ -1,5 +1,63 @@
 const calendarDays = document.querySelector("#calendar-days");
 const galleryGrid = document.querySelector("#gallery-grid");
+const accessibilityToggle = document.querySelector("#accessibility-toggle");
+const accessibilityControls = document.querySelector("#accessibility-controls");
+const accessibilityDismiss = document.querySelector("#accessibility-dismiss");
+const kakaoShareButton = document.querySelector("#kakao-share-btn");
+
+if (accessibilityToggle) {
+  const storageKey = "wedding-invitation-accessibility-mode";
+  const requestedView = new URLSearchParams(window.location.search).get("view");
+  const requestedMode = requestedView === "large" ? true : requestedView === "normal" ? false : null;
+
+  function setAccessibilityMode(enabled) {
+    document.body.classList.toggle("accessibility-mode", enabled);
+    accessibilityToggle.setAttribute("aria-pressed", String(enabled));
+    accessibilityToggle.setAttribute(
+      "aria-label",
+      `큰 글씨와 높은 대비 모드 ${enabled ? "끄기" : "켜기"}`,
+    );
+  }
+
+  try {
+    const savedMode = localStorage.getItem(storageKey) === "true";
+    setAccessibilityMode(requestedMode === null ? savedMode : requestedMode);
+  } catch (error) {
+    console.warn("접근성 모드 설정을 불러오지 못했습니다.", error);
+    setAccessibilityMode(requestedMode === null ? false : requestedMode);
+  }
+
+  accessibilityToggle.addEventListener("click", () => {
+    const enabled = accessibilityToggle.getAttribute("aria-pressed") !== "true";
+    setAccessibilityMode(enabled);
+
+    if (requestedMode !== null) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("view");
+      window.history.replaceState(null, "", url);
+    }
+
+    try {
+      localStorage.setItem(storageKey, String(enabled));
+    } catch (error) {
+      console.warn("접근성 모드 설정을 저장하지 못했습니다.", error);
+    }
+  });
+
+  accessibilityDismiss?.addEventListener("click", () => {
+    accessibilityControls?.classList.add("accessibility-controls--dismissed");
+  });
+
+  if (kakaoShareButton && "IntersectionObserver" in window) {
+    const shareButtonObserver = new IntersectionObserver(
+      ([entry]) => {
+        accessibilityControls?.classList.toggle("accessibility-controls--share-visible", entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+    shareButtonObserver.observe(kakaoShareButton);
+  }
+}
 
 if (window.Kakao && window.KAKAO_JS_KEY && !window.Kakao.isInitialized()) {
   window.Kakao.init(window.KAKAO_JS_KEY);
@@ -200,11 +258,17 @@ function showToast(message) {
   }, 2200);
 }
 
-const kakaoShareButton = document.querySelector("#kakao-share-btn");
 if (kakaoShareButton) {
   kakaoShareButton.addEventListener("click", async () => {
-    const shareUrl = window.location.href;
-    const shareTitle = "성렬 & 소정 결혼합니다";
+    const createShareUrl = (view) => {
+      const url = new URL(window.location.href);
+      url.searchParams.set("view", view);
+      url.hash = "";
+      return url.toString();
+    };
+    const shareUrl = createShareUrl("normal");
+    const largeTextShareUrl = createShareUrl("large");
+    const shareTitle = "성렬 & 소정, 결혼합니다";
     const shareText = "2027년 1월 9일 토요일 낮 12시\n양재 온누리교회 사랑홀";
 
     try {
@@ -220,6 +284,22 @@ if (kakaoShareButton) {
               webUrl: shareUrl,
             },
           },
+          buttons: [
+            {
+              title: "기본 글씨로 보기",
+              link: {
+                mobileWebUrl: shareUrl,
+                webUrl: shareUrl,
+              },
+            },
+            {
+              title: "큰 글씨로 보기",
+              link: {
+                mobileWebUrl: largeTextShareUrl,
+                webUrl: largeTextShareUrl,
+              },
+            },
+          ],
         });
         return;
       }
