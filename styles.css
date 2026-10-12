@@ -656,7 +656,6 @@ h2,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
   padding: 11px 8px;
   border-radius: 999px;
   background: #ffffff;
@@ -671,23 +670,11 @@ h2,
   cursor: pointer;
 }
 
-.map-app-arrow {
-  width: 12px;
-  height: 12px;
-  color: #a4a198;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
 .map-app-btn:hover {
   transform: translateY(-2px);
   border-color: var(--accent);
   color: var(--ink);
   box-shadow: 0 4px 14px rgba(53, 67, 59, 0.09);
-}
-
-.map-app-btn:hover .map-app-arrow {
-  color: var(--accent);
-  transform: translateX(2px);
 }
 
 .map-app-btn:active {
@@ -1315,20 +1302,21 @@ h2,
   padding: 12px 18px;
   border: 0;
   border-radius: 999px;
-  background: #fee500;
-  color: #3b2c1e;
+  background: #e8e3d8;
+  color: #35433b;
   font: inherit;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .footer .kakao-share-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
+  background: #f0ece4;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
 }
 
 .footer .kakao-share-btn:active {
@@ -1543,6 +1531,7 @@ h2,
   border-collapse: collapse;
   table-layout: auto;
   font: inherit;
+  font-family: var(--serif);
 }
 
 .section.invitation {
@@ -1603,4 +1592,8 @@ h2,
   width: 2.5em;
   padding-left: 0.35rem;
   text-align: right;
+}
+
+.family-lines .family-child strong {
+  color: #686d64;
 }
