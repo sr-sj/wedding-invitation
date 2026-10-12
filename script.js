@@ -286,7 +286,7 @@ if (kakaoShareButton) {
           },
           buttons: [
             {
-              title: "기본 글씨로 보기",
+              title: "청첩장 보기",
               link: {
                 mobileWebUrl: shareUrl,
                 webUrl: shareUrl,
