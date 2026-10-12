@@ -694,8 +694,8 @@ h2,
   transform: translateY(0);
 }
 
-/* 프리미엄 셔틀버스 모빌리티 가이드 */
-.shuttle-card {
+/* 셔틀 및 대중교통 안내 카드 */
+.transport-card {
   width: min(100%, 480px);
   margin: 36px auto 0;
   padding: 26px 20px 22px;
@@ -706,7 +706,7 @@ h2,
   text-align: center;
 }
 
-.shuttle-card-header {
+.transport-card-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -714,7 +714,7 @@ h2,
   margin-bottom: 22px;
 }
 
-.shuttle-badge {
+.transport-badge {
   font-size: 8.5px;
   letter-spacing: 0.2em;
   font-weight: 600;
@@ -724,7 +724,7 @@ h2,
   border-radius: 20px;
 }
 
-.shuttle-card-header h4 {
+.transport-card-header h4 {
   margin: 0;
   font-family: var(--serif);
   font-size: 16.5px;
@@ -732,10 +732,152 @@ h2,
   color: var(--ink);
 }
 
-.shuttle-timeline {
+.public-transit-card {
+  margin-top: 16px;
+}
+
+.shuttle-card {
+  margin-top: 16px;
+}
+
+.public-transit-card .transport-card-header {
+  margin-bottom: 18px;
+}
+
+.transit-mode {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 12px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(222, 217, 206, 0.7);
+  text-align: left;
+}
+
+.transit-mode-heading {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 7px;
+  padding-top: 2px;
+}
+
+.transit-mode-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fbf9f5;
+  color: var(--accent);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.subway-icon {
+  color: #6e7b69;
+}
+
+.transit-mode-heading h5 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.transit-mode-content {
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.bus-routes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.bus-routes span {
+  min-width: 35px;
+  padding: 4px 7px;
+  border: 1px solid rgba(222, 217, 206, 0.85);
+  border-radius: 999px;
+  background: #fbf9f5;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.transit-mode-content p {
+  margin: 0;
+  color: #656960;
+  font-size: 11.5px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.transit-mode-content p strong,
+.subway-directions li span {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.walk-distance {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.subway-mode {
+  padding-bottom: 0;
+}
+
+.transit-mode-content .subway-lines {
+  margin-bottom: 9px;
+}
+
+.subway-directions {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: subway-step;
+}
+
+.subway-directions li {
+  position: relative;
+  padding-left: 24px;
+  color: #656960;
+  font-size: 11px;
+  line-height: 1.65;
+  word-break: keep-all;
+  counter-increment: subway-step;
+}
+
+.subway-directions li::before {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fbf9f5;
+  color: var(--accent);
+  content: counter(subway-step);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.shuttle-timeline {
+  display: grid;
+  gap: 8px;
   padding: 16px 12px;
   background: #fbf9f5;
   border-radius: 12px;
@@ -743,35 +885,58 @@ h2,
   margin-bottom: 16px;
 }
 
-.timeline-station {
-  display: flex;
-  flex-direction: column;
+.timeline-path {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18% 64% 18%;
   align-items: center;
-  gap: 7px;
-  min-width: 90px;
+  height: 22px;
 }
 
 .station-node {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
   width: 12px;
   height: 12px;
   border-radius: 50%;
   border: 2px solid #ffffff;
   box-shadow: 0 0 0 2px #b6b8ae;
+  transform: translate(-50%, -50%);
 }
 
 .station-node.start {
+  left: 18%;
   background: #8e9085;
 }
 
 .station-node.end {
+  left: 82%;
   background: var(--accent);
   box-shadow: 0 0 0 2px var(--accent);
+}
+
+.timeline-stations {
+  display: grid;
+  grid-template-columns: 36% 28% 36%;
 }
 
 .station-meta {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  width: max-content;
+  text-align: center;
+}
+
+.timeline-stations .station-meta:first-child {
+  grid-column: 1;
+  justify-self: center;
+}
+
+.timeline-stations .station-meta:last-child {
+  grid-column: 3;
+  justify-self: center;
 }
 
 .station-name {
@@ -779,6 +944,7 @@ h2,
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .station-sub {
@@ -786,23 +952,10 @@ h2,
   color: var(--muted);
 }
 
-.timeline-route {
-  flex: 1;
-  padding: 0 6px;
-}
-
-.timeline-track {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .track-line {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 18%;
+  right: 18%;
   top: 50%;
   height: 1px;
   background: repeating-linear-gradient(90deg, #c9c4b7, #c9c4b7 4px, transparent 4px, transparent 8px);
@@ -810,11 +963,12 @@ h2,
 }
 
 .track-badge {
+  grid-column: 2;
+  justify-self: center;
   position: relative;
   z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
   padding: 3px 9px;
   border-radius: 20px;
   background: #ffffff;
@@ -826,13 +980,7 @@ h2,
   box-shadow: 0 2px 6px rgba(53, 67, 59, 0.05);
 }
 
-.bus-vector {
-  width: 13px;
-  height: 13px;
-  stroke: var(--accent);
-}
-
-.shuttle-card-footer p {
+.transport-card-footer p {
   margin: 0;
   color: #656960;
   font-size: 12px;
@@ -840,7 +988,7 @@ h2,
   word-break: keep-all;
 }
 
-.shuttle-card-footer strong {
+.transport-card-footer strong {
   color: var(--ink);
   font-weight: 600;
 }
@@ -1104,22 +1252,9 @@ h2,
 }
 
 .info-sep span {
-  width: 48px;
+  width: 100%;
   height: 1px;
-  background: rgba(222, 217, 206, 0.85);
-  position: relative;
-}
-
-.info-sep span::after {
-  content: "♦";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #ffffff;
-  padding: 0 6px;
-  font-size: 7px;
-  color: var(--accent);
+  background: var(--line);
 }
 
 /* 프리미엄 플로팅 토스트 */
@@ -1270,16 +1405,17 @@ h2,
     font-size: 11.5px;
   }
 
-  .shuttle-card {
+  .transport-card {
     padding: 22px 14px 18px;
+  }
+
+  .transit-mode {
+    grid-template-columns: 68px minmax(0, 1fr);
+    gap: 8px;
   }
 
   .shuttle-timeline {
     padding: 14px 8px;
-  }
-
-  .timeline-station {
-    min-width: 76px;
   }
 
   .station-name {
@@ -1402,10 +1538,15 @@ h2,
 /* 테두리 없는 표로 가족관계의 각 기준선을 고정 */
 .family-lines {
   width: auto;
-  margin: 0 auto;
+  margin: 23px auto 0;
+  padding: 30px 0 22px;
   border-collapse: collapse;
   table-layout: auto;
   font: inherit;
+}
+
+.section.invitation {
+  padding-bottom: 56px;
 }
 
 .family-lines td {

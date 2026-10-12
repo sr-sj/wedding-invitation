@@ -170,38 +170,81 @@
           </a>
         </nav>
 
-        <!-- 감성적인 셔틀버스 모빌리티 가이드 -->
-        <div class="shuttle-card" aria-label="셔틀버스 이용 안내">
-          <div class="shuttle-card-header">
-            <span class="shuttle-badge">SHUTTLE BUS</span>
+        <div class="transport-card public-transit-card" aria-label="버스와 지하철 이용 안내">
+          <div class="transport-card-header">
+            <span class="transport-badge">PUBLIC TRANSIT</span>
+            <h4>대중교통 이용 안내</h4>
+          </div>
+
+          <div class="transit-mode">
+            <div class="transit-mode-heading">
+              <span class="transit-mode-icon" aria-hidden="true">BUS</span>
+              <h5>시내버스</h5>
+            </div>
+            <div class="transit-mode-content">
+              <div class="bus-routes" aria-label="시내버스 노선">
+                <span>140</span><span>421</span><span>440</span><span>441</span>
+                <span>452</span><span>470</span><span>741</span>
+              </div>
+              <p><strong>중앙차로 일동제약사거리</strong> 또는 <strong>교육개발원 입구</strong> 하차</p>
+              <span class="walk-distance">도보 약 500m · 10분</span>
+            </div>
+          </div>
+
+          <div class="transit-mode">
+            <div class="transit-mode-heading">
+              <span class="transit-mode-icon" aria-hidden="true">BUS</span>
+              <h5>마을버스</h5>
+            </div>
+            <div class="transit-mode-content">
+              <div class="bus-routes" aria-label="마을버스 노선">
+                <span>8</span><span>18</span>
+              </div>
+              <p><strong>일동제약 앞</strong> 하차</p>
+              <span class="walk-distance">도보 약 300m · 5분</span>
+            </div>
+          </div>
+
+          <div class="transit-mode subway-mode">
+            <div class="transit-mode-heading">
+              <span class="transit-mode-icon subway-icon" aria-hidden="true">SUB</span>
+              <h5>지하철</h5>
+            </div>
+            <div class="transit-mode-content">
+              <p class="subway-lines">3호선 · 신분당선 <strong>양재역</strong> 하차</p>
+              <ol class="subway-directions">
+                <li><span>9·10·11번 출구</span>로 나와 양재 꽃시장·성남 방면으로 직진</li>
+                <li><span>약 500m 직진</span> 후 서초 주민센터 지나 우회전</li>
+                <li>골목으로 <span>약 200m 직진</span>, 오른편에 온누리교회</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="transport-card shuttle-card" aria-label="셔틀버스 이용 안내">
+          <div class="transport-card-header">
+            <span class="transport-badge">SHUTTLE BUS</span>
             <h4>셔틀버스 운행 안내</h4>
           </div>
           <div class="shuttle-timeline" aria-hidden="true">
-            <div class="timeline-station">
+            <div class="timeline-path">
+              <span class="track-line"></span>
               <span class="station-node start"></span>
+              <span class="track-badge">10분 간격 운행</span>
+              <span class="station-node end"></span>
+            </div>
+            <div class="timeline-stations">
               <div class="station-meta">
-                <strong class="station-name">양재역 10번<br>출구 앞</strong>
+                <strong class="station-name">양재역 10번 출구 앞</strong>
                 <span class="station-sub">3호선 · 신분당선</span>
               </div>
-            </div>
-            <div class="timeline-route">
-              <div class="timeline-track">
-                <span class="track-line"></span>
-                <span class="track-badge">
-                  <svg class="bus-vector" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="15" rx="3"/><circle cx="7.5" cy="15.5" r="1.5"/><circle cx="16.5" cy="15.5" r="1.5"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M6 4v-1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
-                  <span>10분 간격 운행</span>
-                </span>
-              </div>
-            </div>
-            <div class="timeline-station">
-              <span class="station-node end"></span>
               <div class="station-meta">
                 <strong class="station-name">온누리교회</strong>
                 <span class="station-sub">사랑홀 로비</span>
               </div>
             </div>
           </div>
-          <div class="shuttle-card-footer">
+          <div class="transport-card-footer">
             <p>
               예식 당일 주차 공간이 협소할 수 있으니<br>
               <strong>양재역 10번 출구</strong>에서 출발하는 전용 셔틀버스를<br>이용해 주시기 바랍니다.
