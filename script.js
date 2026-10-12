@@ -204,17 +204,21 @@ const kakaoShareButton = document.querySelector("#kakao-share-btn");
 if (kakaoShareButton) {
   kakaoShareButton.addEventListener("click", async () => {
     const shareUrl = window.location.href;
-    const shareTitle = document.title;
-    const shareText = "성렬과 소정의 결혼식에 초대합니다.";
+    const shareTitle = "성렬 & 소정 결혼합니다";
+    const shareText = "2027년 1월 9일 토요일 낮 12시\n양재 온누리교회 사랑홀";
 
     try {
       if (window.Kakao && window.Kakao.Share && window.Kakao.isInitialized?.()) {
         window.Kakao.Share.sendDefault({
-          objectType: "text",
-          text: `${shareText}\n${shareTitle}`,
-          link: {
-            mobileWebUrl: shareUrl,
-            webUrl: shareUrl,
+          objectType: "feed",
+          content: {
+            title: shareTitle,
+            description: shareText,
+            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/main.jpg",
+            link: {
+              mobileWebUrl: shareUrl,
+              webUrl: shareUrl,
+            },
           },
         });
         return;
