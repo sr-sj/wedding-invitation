@@ -5,6 +5,18 @@ const accessibilityControls = document.querySelector("#accessibility-controls");
 const accessibilityDismiss = document.querySelector("#accessibility-dismiss");
 const kakaoShareButton = document.querySelector("#kakao-share-btn");
 
+function setAccountListsExpanded(expanded) {
+  document.querySelectorAll(".foldable-trigger").forEach((button) => {
+    const contentId = button.getAttribute("aria-controls");
+    const content = contentId ? document.getElementById(contentId) : null;
+
+    button.setAttribute("aria-expanded", String(expanded));
+    if (content) {
+      content.hidden = !expanded;
+    }
+  });
+}
+
 if (accessibilityToggle) {
   const storageKey = "wedding-invitation-accessibility-mode";
   const requestedView = new URLSearchParams(window.location.search).get("view");
@@ -12,6 +24,7 @@ if (accessibilityToggle) {
 
   function setAccessibilityMode(enabled) {
     document.body.classList.toggle("accessibility-mode", enabled);
+    setAccountListsExpanded(enabled);
     accessibilityToggle.setAttribute("aria-pressed", String(enabled));
     accessibilityToggle.setAttribute(
       "aria-label",
