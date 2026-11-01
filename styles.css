@@ -161,23 +161,24 @@ a {
 }
 
 .hero {
+  --hero-photo-height: min(68svh, 560px);
   position: relative;
   display: flex;
   min-height: min(900px, 100svh);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
-  padding: 54px 22px 86px;
+  padding: calc(var(--hero-photo-height) - 16px) 22px 86px;
   text-align: center;
 }
 
 .hero-photo {
   position: absolute;
   inset: 0 0 auto;
-  height: 57%;
+  height: var(--hero-photo-height);
   overflow: hidden;
-  background: url("images/main.jpg") center / cover no-repeat;
+  background: url("images/06.jpg") center top / cover no-repeat;
 }
 
 .hero-photo-note {
@@ -205,7 +206,7 @@ a {
   z-index: 2;
   width: min(100%, 520px);
   min-width: 0;
-  margin-top: 220px;
+  margin-top: 0;
   padding: 38px 20px 30px;
   border-radius: 6px;
   background: rgb(247 244 238 / 94%);
@@ -1388,15 +1389,8 @@ h2,
 
 @media (min-width: 700px) {
   .hero {
+    --hero-photo-height: min(75svh, 640px);
     min-height: 800px;
-  }
-
-  .hero-photo {
-    height: 68%;
-  }
-
-  .hero-copy {
-    margin-top: 280px;
   }
 
   .section {

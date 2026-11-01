@@ -291,7 +291,7 @@ if (kakaoShareButton) {
           content: {
             title: shareTitle,
             description: shareText,
-            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/main.jpg",
+            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/06.jpg",
             link: {
               mobileWebUrl: shareUrl,
               webUrl: shareUrl,
