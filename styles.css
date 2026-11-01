@@ -304,33 +304,6 @@ h2,
   font-size: 12px;
 }
 
-.scroll-cue {
-  position: absolute;
-  bottom: 27px;
-  left: 50%;
-  width: 24px;
-  height: 34px;
-  border: 1px solid rgb(53 67 59 / 33%);
-  border-radius: 15px;
-  transform: translateX(-50%);
-}
-
-.scroll-cue span {
-  position: absolute;
-  top: 7px;
-  left: 10px;
-  width: 2px;
-  height: 7px;
-  border-radius: 2px;
-  background: var(--accent);
-  animation: scroll 1.7s ease-in-out infinite;
-}
-
-@keyframes scroll {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(8px); opacity: 1; }
-}
-
 .section {
   padding: 92px 24px;
   text-align: center;
