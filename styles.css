@@ -1369,6 +1369,35 @@ h2,
   font-size: 12px;
 }
 
+.wreath-notice {
+  display: none;
+}
+
+.accessibility-mode .wreath-notice {
+  display: block;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border: 1px solid #d8c3a9;
+  background: #fcfaf6;
+  text-align: center;
+}
+
+.wreath-notice strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #806143;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.wreath-notice p {
+  margin: 0;
+  color: #35433b;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
 .info-sep {
   display: flex;
   align-items: center;
@@ -1865,6 +1894,12 @@ body.accessibility-mode {
 
 .accessibility-mode .info-block h3 {
   font-size: 20px;
+}
+
+.accessibility-mode .wreath-notice p {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .accessibility-mode .footer > p:first-child {
