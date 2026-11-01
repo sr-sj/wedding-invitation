@@ -273,6 +273,26 @@ function handleNavVisibility() {
 window.addEventListener("scroll", handleNavVisibility, { passive: true });
 handleNavVisibility();
 
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (sections.length && "IntersectionObserver" in window && !prefersReducedMotion) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("scroll-reveal--visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  sections.forEach((section) => {
+    section.classList.add("scroll-reveal");
+    revealObserver.observe(section);
+  });
+}
+
 if (navItems.length && sections.length && "IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
     (entries) => {

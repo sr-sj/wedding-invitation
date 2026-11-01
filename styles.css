@@ -6,6 +6,8 @@
   --muted: #85877d;
   --accent: #ae8862;
   --line: #ded9ce;
+  --soft-divider: linear-gradient(90deg, transparent, rgb(174 136 98 / 30%), transparent);
+  --soft-divider-width: 150px;
   --serif: "Gowun Batang", "Batang", serif;
 }
 
@@ -286,7 +288,7 @@ h2,
 .hero-divider span {
   width: 34px;
   height: 1px;
-  background: var(--line);
+  background: var(--soft-divider);
 }
 
 .hero-date,
@@ -335,6 +337,17 @@ h2,
   scroll-margin-top: 52px;
 }
 
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+.scroll-reveal.scroll-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .section h2 {
   margin: 0;
   font-size: 28px;
@@ -377,7 +390,8 @@ h2,
   gap: 14px;
   margin: 43px auto 0;
   padding-top: 26px;
-  border-top: 1px solid var(--line);
+  border-top: 0;
+  background: var(--soft-divider) top center / var(--soft-divider-width) 1px no-repeat;
   color: #77796f;
   font-size: 12px;
 }
@@ -488,8 +502,9 @@ h2,
 
 .calendar-weekdays {
   padding: 10px 0;
-  border-top: 1px solid rgba(222, 217, 206, 0.7);
-  border-bottom: 1px solid rgba(222, 217, 206, 0.7);
+  background:
+    var(--soft-divider) top center / 180px 1px no-repeat,
+    var(--soft-divider) bottom center / 180px 1px no-repeat;
   color: #8c8d83;
   font-size: 10.5px;
   font-weight: 500;
@@ -532,7 +547,7 @@ h2,
 .calendar-countdown-wrap {
   margin-top: 20px;
   padding-top: 18px;
-  border-top: 1px dashed rgba(222, 217, 206, 0.85);
+  background: var(--soft-divider) top center / 180px 1px no-repeat;
   text-align: center;
 }
 
@@ -875,7 +890,8 @@ h2,
   grid-template-columns: 84px minmax(0, 1fr);
   gap: 12px;
   padding: 15px 0;
-  border-top: 1px solid rgba(222, 217, 206, 0.7);
+  border-top: 0;
+  background: var(--soft-divider) top center / 100% 1px no-repeat;
   text-align: left;
 }
 
@@ -1406,9 +1422,9 @@ h2,
 }
 
 .info-sep span {
-  width: 100%;
+  width: var(--soft-divider-width);
   height: 1px;
-  background: var(--line);
+  background: var(--soft-divider);
 }
 
 /* 프리미엄 플로팅 토스트 */
