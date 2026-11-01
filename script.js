@@ -6,12 +6,33 @@ const galleryViewerClose = document.querySelector("#gallery-viewer-close");
 const galleryViewerPrev = document.querySelector("#gallery-viewer-prev");
 const galleryViewerNext = document.querySelector("#gallery-viewer-next");
 const galleryViewerCount = document.querySelector("#gallery-viewer-count");
-const galleryPhotos = ["images/02.jpg", "images/06.jpg"];
+const galleryPhotos = [
+  "images/gallery/g-01.jpg",
+  "images/gallery/g-02.jpg",
+  "images/gallery/g-03.jpg",
+  "images/gallery/g-04.jpg",
+  "images/gallery/g-05.jpg",
+  "images/gallery/g-06.jpg",
+  "images/gallery/g-07.jpg",
+  "images/gallery/g-08.jpg",
+  "images/gallery/g-09.jpg",
+  "images/gallery/g-10.jpg",
+  "images/gallery/g-11.jpg",
+  "images/gallery/g-12.jpg",
+];
 let currentGalleryIndex = 0;
 const accessibilityToggle = document.querySelector("#accessibility-toggle");
 const accessibilityControls = document.querySelector("#accessibility-controls");
 const accessibilityDismiss = document.querySelector("#accessibility-dismiss");
 const kakaoShareButton = document.querySelector("#kakao-share-btn");
+
+document.addEventListener("touchmove", (event) => {
+  if (event.touches.length > 1) {
+    event.preventDefault();
+  }
+}, { capture: true, passive: false });
+document.addEventListener("gesturestart", (event) => event.preventDefault(), { capture: true });
+document.addEventListener("gesturechange", (event) => event.preventDefault(), { capture: true });
 
 function setAccountListsExpanded(expanded) {
   document.querySelectorAll(".foldable-trigger").forEach((button) => {
@@ -111,38 +132,26 @@ if (calendarDays) {
 if (galleryGrid) {
   const slots = document.createDocumentFragment();
 
-  for (let index = 1; index <= 30; index += 1) {
-    const photo = galleryPhotos[index - 1];
-    const hasPhoto = Boolean(photo);
-    const slot = document.createElement(hasPhoto ? "button" : "div");
-    const number = String(index).padStart(2, "0");
-    slot.className = hasPhoto ? "gallery-slot gallery-slot--photo" : "gallery-slot";
+  galleryPhotos.forEach((photo, index) => {
+    const slot = document.createElement("button");
+    slot.className = "gallery-slot gallery-slot--photo";
+    slot.setAttribute("type", "button");
+    slot.setAttribute("aria-label", `사진 ${index + 1} 크게 보기`);
 
-    if (hasPhoto) {
-      slot.setAttribute("type", "button");
-      slot.setAttribute("aria-label", `사진 ${number} 크게 보기`);
-      const image = document.createElement("img");
-      image.src = photo;
-      image.alt = "";
-      slot.append(image);
-      slot.addEventListener("click", () => {
-        if (galleryViewerImage && galleryViewer) {
-          currentGalleryIndex = index - 1;
-          updateGalleryViewer();
-          galleryViewer.showModal();
-        }
-      });
-    } else {
-      slot.setAttribute("role", "img");
-      slot.setAttribute("aria-label", `사진 ${number} 자리`);
-      const label = document.createElement("span");
-      label.setAttribute("aria-hidden", "true");
-      label.textContent = `PHOTO ${number}`;
+    const image = document.createElement("img");
+    image.src = photo;
+    image.alt = "";
+    slot.append(image);
+    slot.addEventListener("click", () => {
+      if (galleryViewerImage && galleryViewer) {
+        currentGalleryIndex = index;
+        updateGalleryViewer();
+        galleryViewer.showModal();
+      }
+    });
 
-      slot.append(label);
-    }
     slots.append(slot);
-  }
+  });
 
   galleryGrid.append(slots);
 }
@@ -187,14 +196,6 @@ galleryViewer?.addEventListener("touchend", (event) => {
     showAdjacentGalleryPhoto(swipeDistance > 0 ? -1 : 1);
   }
 }, { passive: true });
-galleryViewer?.addEventListener("touchmove", (event) => {
-  if (event.touches.length > 1) {
-    event.preventDefault();
-  }
-}, { passive: false });
-galleryViewer?.addEventListener("gesturestart", (event) => event.preventDefault());
-galleryViewer?.addEventListener("gesturechange", (event) => event.preventDefault());
-
 /* ==========================================================================
    1. 실시간 D-Day 카운트다운 타이머 (초 단위 라이브)
    ========================================================================== */
@@ -365,7 +366,7 @@ if (kakaoShareButton) {
           content: {
             title: shareTitle,
             description: shareText,
-            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/02.jpg",
+            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/main.jpg",
             link: {
               mobileWebUrl: shareUrl,
               webUrl: shareUrl,

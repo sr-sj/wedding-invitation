@@ -15,6 +15,7 @@
 
 html {
   scroll-behavior: smooth;
+  touch-action: pan-x pan-y;
 }
 
 body {
@@ -178,7 +179,8 @@ a {
   inset: 0 0 auto;
   height: var(--hero-photo-height);
   overflow: hidden;
-  background: url("images/02.jpg") center / cover no-repeat;
+  background: url("images/main.jpg") center / cover no-repeat;
+  touch-action: pan-x pan-y;
 }
 
 .hero-photo-note {
@@ -612,6 +614,7 @@ h2,
 .gallery-slot {
   position: relative;
   display: grid;
+  width: 100%;
   min-height: 0;
   aspect-ratio: 1 / 1;
   place-items: center;
@@ -621,18 +624,6 @@ h2,
     linear-gradient(145deg, #e9e5db, #d9ded5);
 }
 
-.gallery-slot:nth-child(3n + 2) {
-  background:
-    radial-gradient(ellipse at 28% 73%, rgb(255 255 255 / 50%), transparent 38%),
-    linear-gradient(145deg, #e9e1d5, #dedbd0);
-}
-
-.gallery-slot:nth-child(3n) {
-  background:
-    radial-gradient(ellipse at 78% 78%, rgb(255 255 255 / 45%), transparent 36%),
-    linear-gradient(145deg, #e1e4dc, #d6d9d0);
-}
-
 .gallery-slot--photo {
   padding: 0;
   border: 0;
@@ -640,10 +631,12 @@ h2,
 }
 
 .gallery-slot--photo img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: 50% 50%;
 }
 
 .gallery-viewer[open] {
@@ -727,12 +720,6 @@ h2,
   font-family: sans-serif;
   font-size: 12px;
   transform: translateX(-50%);
-}
-
-.gallery-slot span {
-  color: rgb(76 85 75 / 61%);
-  font-size: 8px;
-  letter-spacing: 0.13em;
 }
 
 .location-section {
