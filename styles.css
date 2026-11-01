@@ -178,7 +178,7 @@ a {
   inset: 0 0 auto;
   height: var(--hero-photo-height);
   overflow: hidden;
-  background: url("images/06.jpg") center top / cover no-repeat;
+  background: url("images/02.jpg") center / cover no-repeat;
 }
 
 .hero-photo-note {
@@ -633,19 +633,105 @@ h2,
     linear-gradient(145deg, #e1e4dc, #d6d9d0);
 }
 
+.gallery-slot--photo {
+  padding: 0;
+  border: 0;
+  cursor: zoom-in;
+}
+
+.gallery-slot--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-viewer[open] {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  touch-action: none;
+}
+
+.gallery-viewer::backdrop {
+  background: rgb(20 24 21 / 90%);
+}
+
+.gallery-viewer > img {
+  display: block;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 48px);
+  object-fit: contain;
+  touch-action: none;
+}
+
+.gallery-viewer-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gallery-viewer-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 32px;
+  line-height: 1;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.gallery-viewer-prev {
+  left: 16px;
+}
+
+.gallery-viewer-next {
+  right: 16px;
+}
+
+.gallery-viewer-count {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 12px;
+  transform: translateX(-50%);
+}
+
 .gallery-slot span {
   color: rgb(76 85 75 / 61%);
   font-size: 8px;
   letter-spacing: 0.13em;
-}
-
-.gallery-slot::before {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgb(76 85 75 / 19%);
-  border-radius: 50%;
-  content: "";
 }
 
 .location-section {

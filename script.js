@@ -1,5 +1,13 @@
 const calendarDays = document.querySelector("#calendar-days");
 const galleryGrid = document.querySelector("#gallery-grid");
+const galleryViewer = document.querySelector("#gallery-viewer");
+const galleryViewerImage = document.querySelector("#gallery-viewer-image");
+const galleryViewerClose = document.querySelector("#gallery-viewer-close");
+const galleryViewerPrev = document.querySelector("#gallery-viewer-prev");
+const galleryViewerNext = document.querySelector("#gallery-viewer-next");
+const galleryViewerCount = document.querySelector("#gallery-viewer-count");
+const galleryPhotos = ["images/02.jpg", "images/06.jpg"];
+let currentGalleryIndex = 0;
 const accessibilityToggle = document.querySelector("#accessibility-toggle");
 const accessibilityControls = document.querySelector("#accessibility-controls");
 const accessibilityDismiss = document.querySelector("#accessibility-dismiss");
@@ -104,22 +112,88 @@ if (galleryGrid) {
   const slots = document.createDocumentFragment();
 
   for (let index = 1; index <= 30; index += 1) {
-    const slot = document.createElement("div");
+    const photo = galleryPhotos[index - 1];
+    const hasPhoto = Boolean(photo);
+    const slot = document.createElement(hasPhoto ? "button" : "div");
     const number = String(index).padStart(2, "0");
-    slot.className = "gallery-slot";
-    slot.setAttribute("role", "img");
-    slot.setAttribute("aria-label", `사진 ${number} 자리`);
+    slot.className = hasPhoto ? "gallery-slot gallery-slot--photo" : "gallery-slot";
 
-    const label = document.createElement("span");
-    label.setAttribute("aria-hidden", "true");
-    label.textContent = `PHOTO ${number}`;
+    if (hasPhoto) {
+      slot.setAttribute("type", "button");
+      slot.setAttribute("aria-label", `사진 ${number} 크게 보기`);
+      const image = document.createElement("img");
+      image.src = photo;
+      image.alt = "";
+      slot.append(image);
+      slot.addEventListener("click", () => {
+        if (galleryViewerImage && galleryViewer) {
+          currentGalleryIndex = index - 1;
+          updateGalleryViewer();
+          galleryViewer.showModal();
+        }
+      });
+    } else {
+      slot.setAttribute("role", "img");
+      slot.setAttribute("aria-label", `사진 ${number} 자리`);
+      const label = document.createElement("span");
+      label.setAttribute("aria-hidden", "true");
+      label.textContent = `PHOTO ${number}`;
 
-    slot.append(label);
+      slot.append(label);
+    }
     slots.append(slot);
   }
 
   galleryGrid.append(slots);
 }
+
+function updateGalleryViewer() {
+  if (!galleryViewerImage || !galleryViewerCount) return;
+
+  galleryViewerImage.src = galleryPhotos[currentGalleryIndex];
+  galleryViewerImage.alt = `성렬과 소정의 웨딩 사진 ${currentGalleryIndex + 1}`;
+  galleryViewerCount.textContent = `${currentGalleryIndex + 1} / ${galleryPhotos.length}`;
+}
+
+function showAdjacentGalleryPhoto(direction) {
+  currentGalleryIndex = (currentGalleryIndex + direction + galleryPhotos.length) % galleryPhotos.length;
+  updateGalleryViewer();
+}
+
+galleryViewerClose?.addEventListener("click", () => galleryViewer?.close());
+galleryViewerPrev?.addEventListener("click", () => showAdjacentGalleryPhoto(-1));
+galleryViewerNext?.addEventListener("click", () => showAdjacentGalleryPhoto(1));
+galleryViewer?.addEventListener("click", (event) => {
+  if (event.target === galleryViewer) {
+    galleryViewer.close();
+  }
+});
+galleryViewer?.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") {
+    showAdjacentGalleryPhoto(-1);
+  } else if (event.key === "ArrowRight") {
+    showAdjacentGalleryPhoto(1);
+  }
+});
+
+let galleryTouchStartX = 0;
+galleryViewer?.addEventListener("touchstart", (event) => {
+  galleryTouchStartX = event.changedTouches[0]?.screenX ?? 0;
+}, { passive: true });
+galleryViewer?.addEventListener("touchend", (event) => {
+  const touchEndX = event.changedTouches[0]?.screenX ?? galleryTouchStartX;
+  const swipeDistance = touchEndX - galleryTouchStartX;
+  if (Math.abs(swipeDistance) > 50) {
+    showAdjacentGalleryPhoto(swipeDistance > 0 ? -1 : 1);
+  }
+}, { passive: true });
+galleryViewer?.addEventListener("touchmove", (event) => {
+  if (event.touches.length > 1) {
+    event.preventDefault();
+  }
+}, { passive: false });
+galleryViewer?.addEventListener("gesturestart", (event) => event.preventDefault());
+galleryViewer?.addEventListener("gesturechange", (event) => event.preventDefault());
 
 /* ==========================================================================
    1. 실시간 D-Day 카운트다운 타이머 (초 단위 라이브)
@@ -291,7 +365,7 @@ if (kakaoShareButton) {
           content: {
             title: shareTitle,
             description: shareText,
-            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/06.jpg",
+            imageUrl: "https://sr-sj.github.io/wedding-invitation/images/02.jpg",
             link: {
               mobileWebUrl: shareUrl,
               webUrl: shareUrl,
