@@ -19,6 +19,9 @@ const galleryPhotos = [
   "images/gallery/g-10.jpg",
   "images/gallery/g-11.jpg",
   "images/gallery/g-12.jpg",
+  "images/gallery/g-13.jpg",
+  "images/gallery/g-14.jpg",
+  "images/gallery/g-15.jpg",
 ];
 let currentGalleryIndex = 0;
 const accessibilityToggle = document.querySelector("#accessibility-toggle");
