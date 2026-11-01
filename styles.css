@@ -2,8 +2,8 @@
   color-scheme: light;
   --paper: #f7f4ee;
   --paper-deep: #efebe2;
-  --ink: #35433b;
-  --muted: #85877d;
+  --ink: #26332b;
+  --muted: #626a61;
   --accent: #ae8862;
   --line: #ded9ce;
   --soft-divider: linear-gradient(90deg, transparent, rgb(174 136 98 / 30%), transparent);
@@ -74,7 +74,7 @@ a {
   justify-content: center;
   height: 100%;
   padding: 0 4px;
-  color: #797c73;
+  color: var(--muted);
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.02em;
